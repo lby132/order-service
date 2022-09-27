@@ -19,7 +19,7 @@ public class OrderProducer {
     private KafkaTemplate<String, String> kafkaTemplate;
 
     List<Field> fields = Arrays.asList(new Field("string", true, "order_id"),
-            new Field("string", true, "order_id"),
+            new Field("string", true, "user_id"),
             new Field("string", true, "product_id"),
             new Field("int32", true, "qty"),
             new Field("int32", true, "unit_price"),
@@ -43,8 +43,8 @@ public class OrderProducer {
                 .user_id(orderDto.getUserId())
                 .product_id(orderDto.getProductId())
                 .qty(orderDto.getQty())
-                .unit_Price(orderDto.getUnitPrice())
-                .total_Price(orderDto.getTotalPrice())
+                .unit_price(orderDto.getUnitPrice())
+                .total_price(orderDto.getTotalPrice())
                 .build();
 
         KafkaOrderDto kafkaOrderDto = new KafkaOrderDto(schema, payload);
@@ -58,7 +58,7 @@ public class OrderProducer {
         }
 
         kafkaTemplate.send(topic, jsonInString);
-        log.info("Order Producer send data from the Order microservice: {}", orderDto);
+        log.info("Order Producer send data from the Order microservice: {}", kafkaOrderDto);
 
         return orderDto;
     }

@@ -10,6 +10,7 @@ public class Payload {
     private String user_id;
     private String product_id;
     private int qty;
-    private int unit_Price;
-    private int total_Price;
+    private int unit_price;
+    private int total_price;
 }
+
